@@ -1,24 +1,59 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column       | Type   | Options     |
+| --------     | ------ | ----------- |
+| name         | string | null: false |
+| email        | string | null: false |
+| password     | string | null: false |
+| name_kanji   | string | null: false |
+| name_katakana| string | null: false |
+| birthday     | date   | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :products
+- has_one  :buy_product
 
-* Configuration
+## products テーブル
 
-* Database creation
+| Column   | Type         | Options     |
+| ------   | ------       | ----------- |
+| image    | ActiveStorage| null:false　|
+| name     | string       | null: false |
+| describe | text         | null: false |
+| category | ActiveHash   | null: false |
+| condition| ActiveHash   | null: false |
+| charge   | ActiveHash   | null: false |
+| days     | ActiveHash   | null: false |
+| area     | ActiveHash   | null: false |
+| price    | string       | null: false |
+| user     | references                 |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to :user
+- has_one :buy_product
 
-* Services (job queues, cache servers, search engines, etc.)
+## buy_products テーブル
 
-* Deployment instructions
+| Column         | Type       | Options     |
+| ------         | ---------- | ----------- |
+| credit_number  | string     | null: false |
+| credit_deadline| date       | null: false |
+| security_code  | string     | null: false |
+| postal_code    | string     | null: false |
+| prefecture     | ActiveHash | null: false |
+| municipalities | string     | null: false |
+| address        | string     | null: false |
+| building       | string     | null: false |
+| phone_number   | string     | null: false |
+| user           | references               |
+| product        | references               |
+ 
+### Association
 
-* ...
+- belongs_to :user
+- belongs_to :product
+
