@@ -4,8 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-         PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-         validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
+    has_many :products
+
+    PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+    validates_format_of :password, with: PASSWORD_REGEX, message: 'には英字と数字の両方を含めて設定してください'
 
     with_options presence: true do
       validates :nickname
@@ -16,4 +18,5 @@ class User < ApplicationRecord
       validates :firstname_katakana, format: { with: /\A[ァ-ヶ]+\z/, message: 'に全角カタカナを使用してください' }
       validates :birthday
     end
+
   end
