@@ -13,12 +13,20 @@ class Product < ApplicationRecord
         validates :image
         validates :name
         validates :describe
-        validates :category_id, numericality: { other_than: 1 }
-        validates :condition_id, numericality: { other_than: 1 }
-        validates :charge_id, numericality: { other_than: 1 }
-        validates :delivery_id, numericality: { other_than: 1 }
-        validates :area_id, numericality: { other_than: 1 }
+        validates :category_id
+        validates :condition_id
+        validates :charge_id
+        validates :delivery_id
+        validates :area_id
         validates :price, numericality: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }
+    end
+
+    with_options numericality: { other_than: 1 } do
+        validates :category_id
+        validates :condition_id
+        validates :charge_id
+        validates :delivery_id
+        validates :area_id
     end
 
     

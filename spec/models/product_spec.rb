@@ -27,7 +27,7 @@ RSpec.describe Product, type: :model do
         end
     end
 
-    context "商品出品できるとき" do
+    context "商品出品できないとき" do
         it 'imageがないと出品できない' do
             @product.image = nil
             @product.valid?
@@ -104,6 +104,36 @@ RSpec.describe Product, type: :model do
             @product.price = "dollers"
             @product.valid?
             expect(@product.errors.full_messages).to include("Price is not a number")
+        end
+
+        it 'categoryのid:1が指定されていると出品できない' do
+            @product.category_id = 1
+            @product.valid?
+            expect(@product.errors.full_messages).to include("Category must be other than 1")
+        end
+
+        it 'chargeのid:1が指定されていると出品できない' do
+            @product.charge_id = 1
+            @product.valid?
+            expect(@product.errors.full_messages).to include("Charge must be other than 1")
+        end
+
+        it 'areaのid:1が指定されていると出品できない' do
+            @product.area_id = 1
+            @product.valid?
+            expect(@product.errors.full_messages).to include("Area must be other than 1")
+        end
+
+        it 'conditionのid:1が指定されていると出品できない' do
+            @product.condition_id = 1
+            @product.valid?
+            expect(@product.errors.full_messages).to include("Condition must be other than 1")
+        end
+
+        it 'deliveryのid:1が指定されていると出品できない' do
+            @product.delivery_id = 1
+            @product.valid?
+            expect(@product.errors.full_messages).to include("Delivery must be other than 1")
         end
     end
 
