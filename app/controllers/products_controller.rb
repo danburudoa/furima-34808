@@ -21,13 +21,13 @@ class ProductsController < ApplicationController
     end
 
     def show
-      if user_signed_in? && @product.buy_product != nil
-        redirect_to root_path
-      end
+      
     end
 
     def edit
-      
+      if @product.buy_product != nil
+       　 redirect_to root_path
+      end
     end
 
     def update
