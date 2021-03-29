@@ -30,10 +30,10 @@ class BuyProductsController < ApplicationController
     def pay_item
         Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
             Payjp::Charge.create(
-         　　amount: @product.price,  # 商品の値段
-         　　card: buy_product_params[:token],    # カードトークン
-         　　currency: 'jpy'                 # 通貨の種類（日本円）
-        　　 )
+            amount: @product.price,  # 商品の値段
+            card: buy_product_params[:token],    # カードトークン
+            currency: 'jpy'                 # 通貨の種類（日本円）
+            )
     end
     
     def set_product
@@ -45,6 +45,5 @@ class BuyProductsController < ApplicationController
           redirect_to root_path
         end
     end
-
 
 end
