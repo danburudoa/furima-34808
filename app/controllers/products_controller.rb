@@ -1,4 +1,4 @@
-class ItemsController < ApplicationController
+class ProductsController < ApplicationController
     before_action :authenticate_user!,only:[:new,:create,:edit,:update]
     before_action :set_tweet, only: [:edit, :show,:update,:destroy]
     before_action :move_to_index, only: [:edit,:update,:destroy]
@@ -21,7 +21,9 @@ class ItemsController < ApplicationController
     end
 
     def show
-     
+      if user_signed_in? && @product.buy_product != nil
+        redirect_to root_path
+      end
     end
 
     def edit
@@ -30,7 +32,7 @@ class ItemsController < ApplicationController
 
     def update
       if @product.update(product_params)
-        redirect_to item_path(@product.id)
+           redirect_to product_path(@product.id)
       else
         render :edit
       end
