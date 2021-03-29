@@ -2,8 +2,13 @@ require 'rails_helper'
 
 RSpec.describe BuyProductShip, type: :model do
   before do
-    @buy_product_ship = FactoryBot.build(:buy_product_ship)
-  end
+    @user = FactoryBot.create(:user)
+    @product = FactoryBot.build(:product)
+    @product.image = fixture_file_upload('app/assets/images/flag.png')
+    @product.save
+    sleep 1 #処理を遅らせる
+    @buy_product_ship = FactoryBot.build(:buy_product_ship, user_id: @user.id , product_id: @product.id) 
+   end
 
   describe '購入内容確認' do
     context '商品購入がうまくいく時' do
@@ -65,6 +70,25 @@ RSpec.describe BuyProductShip, type: :model do
         @buy_product_ship.valid?
         expect(@buy_product_ship.errors.full_messages).to include("Phone number Input only number")
       end
+
+      it 'user_idが空だと登録できない' do
+        @buy_product_ship.user_id = ''
+        @buy_product_ship.valid?
+        expect(@buy_product_ship.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'product_idが空だと登録できない' do
+        @buy_product_ship.product_id = ''
+        @buy_product_ship.valid?
+        expect(@buy_product_ship.errors.full_messages).to include("Product can't be blank")
+      end
+
+      it 'area_idで1が選択されると登録できない' do
+        @buy_product_ship.area_id = 1
+        @buy_product_ship.valid?
+        expect(@buy_product_ship.errors.full_messages).to include("Area Select")
+      end
+
       end
     end 
 end

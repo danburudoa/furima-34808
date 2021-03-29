@@ -9,6 +9,8 @@ class BuyProductShip
         validates :address
         validates :phone_number, format: { with: /\A\d{11}\z/, message: 'Input only number' }
         validates :token
+        validates :user_id
+        validates :product_id
      end
         validates :area_id, numericality: { other_than: 1, message: 'Select' }
       
