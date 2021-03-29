@@ -55,7 +55,7 @@
 | Column       　| Type   | Options     |
 | --------     　| ------ | ----------- |
 | postal_code    | string     | null: false |
-| area_id        | integer    | null: false |
+| area_id  | integer    | null: false |
 | municipalities | string     | null: false |
 | address        | string     | null: false |
 | building       | string     |             |
@@ -65,12 +65,3 @@
 ### Association
 
 - belongs_to :buy_product
-
-## order テーブル
-
-| Column       　| Type   | Options     |
-| --------     　| ------ | ----------- |
-| postal_code    | string     | null: false |
-| area_id        | integer    | null: false |
-| municipalities | string     | null: false |
-

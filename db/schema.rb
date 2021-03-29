@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_26_024409) do
+ActiveRecord::Schema.define(version: 2021_03_21_074838) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,23 +33,6 @@ ActiveRecord::Schema.define(version: 2021_03_26_024409) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "buy_products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "product_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["product_id"], name: "index_buy_products_on_product_id"
-    t.index ["user_id"], name: "index_buy_products_on_user_id"
-  end
-
-  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "credit_info", null: false
-    t.integer "credit_deadline", null: false
-    t.integer "credit_code", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.text "describe", null: false
@@ -63,19 +46,6 @@ ActiveRecord::Schema.define(version: 2021_03_26_024409) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_products_on_user_id"
-  end
-
-  create_table "ships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "postal_code", null: false
-    t.integer "area_id", null: false
-    t.string "municipalities", null: false
-    t.string "address", null: false
-    t.string "building"
-    t.string "phone_number", null: false
-    t.bigint "buy_product_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["buy_product_id"], name: "index_ships_on_buy_product_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -97,8 +67,5 @@ ActiveRecord::Schema.define(version: 2021_03_26_024409) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "buy_products", "products"
-  add_foreign_key "buy_products", "users"
   add_foreign_key "products", "users"
-  add_foreign_key "ships", "buy_products"
 end
