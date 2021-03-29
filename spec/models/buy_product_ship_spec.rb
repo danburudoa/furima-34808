@@ -89,6 +89,19 @@ RSpec.describe BuyProductShip, type: :model do
         expect(@buy_product_ship.errors.full_messages).to include("Area Select")
       end
 
+
+      it '電話番号が12桁以上だと登録できない' do
+        @buy_product_ship.phone_number = '0000000000000'
+        @buy_product_ship.valid?
+        expect(@buy_product_ship.errors.full_messages).to include("Phone number Input only number")
+      end
+      
+      it '電話番号は英数混合だと登録できない' do
+        @buy_product_ship.phone_number = 'danburu515'
+        @buy_product_ship.valid?
+        expect(@buy_product_ship.errors.full_messages).to include("Phone number Input only number")
+      end
+
       end
     end 
 end
